@@ -3,6 +3,6 @@
 
 @layer components {
     .mycontainer {
-      @apply max-w-7xl mx-auto px-40 py-10;
+      @apply max-w-[95vw] mx-auto px-40 pb-16 py-10;
     }
 }

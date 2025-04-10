@@ -1,4 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
+import LottieIcon from './LottieIcon';
+import { ToastContainer } from 'react-toastify';
+import { handleSuccess, handleError } from '../../util';
 
 
 const Manager = () => {
@@ -24,6 +27,10 @@ const Manager = () => {
         setform({ ...form, [e.target.name]: e.target.value })
     }
 
+    const copyText = (text) =>{
+        navigator.clipboard.writeText(text);
+        handleSuccess('Copied to Clipboard!')
+    }
 
     const showPassword = () => {
         if (ref.current.src.includes("icons/eyecross.png")) {
@@ -86,21 +93,49 @@ const Manager = () => {
                                 <th className='py-2'>Password</th>
                             </tr>
                         </thead>
-                        <tbody className='bg-green-100'>
-                            {passwordArray.map((items, index) => {
-                                return <tr>
-                                    <td className='text-center w-32 py-2 border border-white'><a href={items.site} target='_blank'>{items.site}</a></td>
-                                    <td className='text-center w-32 py-2 border border-white'>{items.username}</td>
-                                    <td className='text-center w-32 py-2 border border-white'>{items.password}</td>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {passwordArray.map((item, index) => (
+                                <tr key={index} className="hover:bg-green-50 transition duration-300">
+                                    <td className="text-center px-4 py-3 border border-gray-200">
+                                        <div className="flex items-center justify-center gap-2">
+                                            <a
+                                                href={item.site}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-green-600 font-medium hover:underline"
+                                            >
+                                                {item.site}
+                                            </a>
+                                            <div className="cursor-pointer hover:scale-110 transition-transform" onClick={()=>{copyText(item.site)}}>
+                                                <LottieIcon />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td className="text-center px-4 py-3 border border-gray-200">
+                                        <div className="flex items-center justify-center gap-2">
+                                            <span>{item.username}</span>
+                                            <div className="cursor-pointer hover:scale-110 transition-transform" onClick={()=>{copyText(item.username)}}>
+                                                <LottieIcon />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td className="text-center px-4 py-3 border border-gray-200">
+                                        <div className="flex items-center justify-center gap-2">
+                                            <span>{item.password}</span>
+                                            <div className="cursor-pointer hover:scale-110 transition-transform" onClick={()=>{copyText(item.password)}}>
+                                                <LottieIcon />
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
-                            })}
-
+                            ))}
                         </tbody>
                     </table>}
 
                 </div>
 
             </div>
+            <ToastContainer />
         </div>
     )
 }
