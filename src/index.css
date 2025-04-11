@@ -6,3 +6,13 @@
       @apply max-w-[95vw] mx-auto px-40 pb-16 py-10;
     }
 }
+
+@layer components {
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+  }
+}
