@@ -2,10 +2,12 @@ const express = require('express');
 const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 
 dotenv.config();
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 const url = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017';
 const dbName = 'passop';
@@ -33,14 +35,14 @@ async function main() {
 
         // Save a password
         app.post('/', async (req, res) => {
-            const { site, username, Password, id } = req.body;
+            const { site, username, password, id } = req.body;
 
-            if (!site || !username || !Password) {
+            if (!site || !username || !password) {
                 return res.status(400).json({ error: 'Site, Username and password are required' });
             }
 
             try {
-                const result = await collection.insertOne({ id, site, username, Password });
+                const result = await collection.insertOne({ id, site, username, password });
                 res.json({ success: true, message: 'Saved successfully', id: result.insertedId });
             } catch (err) {
                 res.status(500).json({ success: false, error: 'Failed to save data' });
