@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <div className='min-h-[80vh] max-h-[90vh] overflow-auto'>
+      <div className='min-h-[80vh] max-h-[90vh] w-full overflow-auto'>
         <Manager />
       </div>
       <Footer />

@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <div className="bg-slate-800 px-4 py-1 shadow-md text-white flex flex-col md:flex-col md:justify-between md:items-center fixed bottom-0 w-full">
             {/* Logo Section */}
-            <div className="logo text-2xl font-bold flex items-center gap-1">
+            <div className="logo text-2xl font-bold flex items-center gap-1 justify-center">
                 <span className="text-green-500">&lt;</span>
                 <span>Pass</span>
                 <span className="text-green-500">OP/&gt;</span>

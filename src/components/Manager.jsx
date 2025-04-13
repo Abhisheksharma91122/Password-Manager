@@ -51,10 +51,16 @@ const Manager = () => {
     }
 
     const handleSave = () => {
+        if(form.site === '' || form.username === '' || form.password === '') {
+            handleError("Every field is required!");
+            return;
+        }
+
         setpasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
         localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]));
         setform(initialform)
         console.log([...passwordArray, { ...form, id: uuidv4() }]);
+        handleSuccess("password saved!")
     }
 
 
@@ -71,11 +77,12 @@ const Manager = () => {
             setpasswordArray(passwordArray.filter(item => item.id != id))
             localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item => item.id != id)))
         }
+        handleSuccess("password deleted!");
     }
 
     return (
         <div>
-            <div className="absolute inset-0 -z-10 h-full w-full bg-green-50 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"><div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-green-400 opacity-20 blur-[100px]"></div></div>
+            {/* <div className="absolute inset-0 -z-10 h-full w-full bg-green-50 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"><div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-green-400 opacity-20 blur-[100px]"></div></div> */}
 
             <div className='mycontainer'>
 
@@ -89,7 +96,7 @@ const Manager = () => {
 
                 <div className='text-black flex flex-col p-4 gap-8 items-center'>
                     <input value={form.site} placeholder='Enter Website URL' onChange={handleChange} className='bg-white rounded-full border border-green-500 p-4 py-1 w-full' type="text" name="site" />
-                    <div className='flex w-full gap-8'>
+                    <div className='flex flex-col md:flex-row w-full gap-8'>
                         <input value={form.username} placeholder='Enter Username' onChange={handleChange} className='bg-white rounded-full border border-green-500 p-4 py-1 w-full' type="text" name="username" />
                         <div className='relative'>
 
@@ -110,7 +117,8 @@ const Manager = () => {
                 <div className='passwords'>
                     <h2 className='font-bold text-xl py-4'>Your Passwords</h2>
                     {passwordArray.length === 0 && <div> No Passwords to Show</div>}
-                    {passwordArray != 0 && <table className="table-auto w-full rounded-md overflow-hidden">
+                    {passwordArray != 0 && <div className='overflow-x-auto mb-10 md:mb-0'> 
+                        <table className="table-auto w-full rounded-md overflow-hidden">
                         <thead className='bg-green-800 text-white'>
                             <tr>
                                 <th className='py-2'>Site</th>
@@ -172,7 +180,7 @@ const Manager = () => {
                                 </tr>
                             ))}
                         </tbody>
-                    </table>}
+                    </table></div>}
 
                 </div>
 
