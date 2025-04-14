@@ -34,9 +34,9 @@ A full-stack Password Manager web application built using **React.js**, **Tailwi
 
 <!-- Upload your screenshots in the `screenshots/` folder and link them below -->
 
-| Home Page | Add Password | Edit Password |
+| Home Page | Add Password | Delete Password |
 |----------|---------------|----------------|
-| ![Home](screenshots/home.png) | ![Add](screenshots/add.png) | ![Edit](screenshots/edit.png) |
+| ![Home](screenshort/home.png) | ![Add](screenshort/add.png) | ![Edit](screenshort/delete.png) |
 
 ---
 
